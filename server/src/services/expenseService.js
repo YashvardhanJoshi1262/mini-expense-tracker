@@ -1,0 +1,36 @@
+const { v4: uuidv4 } = require("uuid");
+const fs = require("fs");
+const path = require("path");
+
+const expensesFilePath = path.join(
+  __dirname,
+  "../data/expenses.json"
+);
+
+const getAllExpenses = () => {
+  const data = fs.readFileSync(expensesFilePath, "utf-8");
+  return JSON.parse(data);
+};
+
+const createExpense = (expenseData) => {
+  const expenses = getAllExpenses();
+
+  const newExpense = {
+    id: uuidv4(),
+    ...expenseData,
+  };
+
+  expenses.push(newExpense);
+
+  fs.writeFileSync(
+    expensesFilePath,
+    JSON.stringify(expenses, null, 2)
+  );
+
+  return newExpense;
+};
+
+module.exports = {
+  getAllExpenses,
+  createExpense,
+};
