@@ -48,8 +48,35 @@ const deleteExpense = (id) => {
   };
 };
 
+const updateExpense = (id, updatedData) => {
+  const expenses = getAllExpenses();
+
+  const updatedExpenses = expenses.map((expense) => {
+    if (expense.id === id) {
+      return {
+        ...expense,
+        ...updatedData,
+      };
+    }
+
+    return expense;
+  });
+
+  fs.writeFileSync(
+    expensesFilePath,
+    JSON.stringify(updatedExpenses, null, 2)
+  );
+
+  const updatedExpense = updatedExpenses.find(
+    (expense) => expense.id === id
+  );
+
+  return updatedExpense;
+};
+
 module.exports = {
   getAllExpenses,
   createExpense,
   deleteExpense,
+  updateExpense,
 };
