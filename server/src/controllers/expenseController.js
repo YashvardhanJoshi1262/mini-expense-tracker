@@ -35,9 +35,17 @@ const updateExpense = (req, res) => {
   res.status(200).json(updatedExpense);
 };
 
+const getExpenseSummary = (req, res) => {
+  const summary =
+    expenseService.getExpenseSummary();
+
+  res.status(200).json(summary);
+};
+
 module.exports = {
   getExpenses,
   createExpense,
   deleteExpense,
   updateExpense,
+  getExpenseSummary,
 };

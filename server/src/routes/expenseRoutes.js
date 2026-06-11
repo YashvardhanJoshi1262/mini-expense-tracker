@@ -7,7 +7,10 @@ const {
   createExpense,
   deleteExpense,
   updateExpense,
+  getExpenseSummary,
 } = require("../controllers/expenseController");
+
+router.get("/summary", getExpenseSummary);
 
 router.get("/", getExpenses);
 

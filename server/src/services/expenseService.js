@@ -74,9 +74,40 @@ const updateExpense = (id, updatedData) => {
   return updatedExpense;
 };
 
+const getExpenseSummary = () => {
+  const expenses = getAllExpenses();
+
+  const totalExpenses = expenses.reduce(
+    (sum, expense) => sum + expense.amount,
+    0
+  );
+
+  const categoryBreakdown = expenses.reduce(
+    (result, expense) => {
+      const category = expense.category;
+
+      if (!result[category]) {
+        result[category] = 0;
+      }
+
+      result[category] += expense.amount;
+
+      return result;
+    },
+    {}
+  );
+
+  return {
+    totalExpenses,
+    expenseCount: expenses.length,
+    categoryBreakdown,
+  };
+};
+
 module.exports = {
   getAllExpenses,
   createExpense,
   deleteExpense,
   updateExpense,
+  getExpenseSummary,
 };
