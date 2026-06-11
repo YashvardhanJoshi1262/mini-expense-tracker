@@ -30,7 +30,26 @@ const createExpense = (expenseData) => {
   return newExpense;
 };
 
+const deleteExpense = (id) => {
+  const expenses = getAllExpenses();
+
+  const filteredExpenses = expenses.filter(
+    (expense) => expense.id !== id
+  );
+
+  fs.writeFileSync(
+    expensesFilePath,
+    JSON.stringify(filteredExpenses, null, 2)
+  );
+
+  return {
+    success: true,
+    message: "Expense deleted successfully",
+  };
+};
+
 module.exports = {
   getAllExpenses,
   createExpense,
+  deleteExpense,
 };

@@ -15,7 +15,17 @@ const createExpense = (req, res) => {
   res.status(201).json(newExpense);
 };
 
+const deleteExpense = (req, res) => {
+  const { id } = req.params;
+
+  const result =
+    expenseService.deleteExpense(id);
+
+  res.status(200).json(result);
+};
+
 module.exports = {
   getExpenses,
   createExpense,
+  deleteExpense,
 };
