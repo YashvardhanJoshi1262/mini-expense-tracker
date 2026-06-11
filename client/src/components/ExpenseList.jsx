@@ -1,22 +1,22 @@
-import { useEffect, useState } from "react";
 import axios from "axios";
+import ExpenseCard from "./ExpenseCard";
 
-function ExpenseList() {
-  const [expenses, setExpenses] = useState([]);
-
-  useEffect(() => {
-    fetchExpenses();
-  }, []);
-
-  const fetchExpenses = async () => {
+function ExpenseList({
+  expenses,
+  fetchExpenses,
+}) {
+  const deleteExpense = async (id) => {
     try {
-      const response = await axios.get(
-        "http://localhost:5000/api/expenses"
+      await axios.delete(
+        `http://localhost:5000/api/expenses/${id}`
       );
 
-      setExpenses(response.data);
+      fetchExpenses();
     } catch (error) {
-      console.error("Error fetching expenses:", error);
+      console.error(
+        "Error deleting expense:",
+        error
+      );
     }
   };
 
@@ -25,12 +25,11 @@ function ExpenseList() {
       <h2>Expense List</h2>
 
       {expenses.map((expense) => (
-        <div key={expense.id}>
-          <p>Amount: ₹{expense.amount}</p>
-          <p>Category: {expense.category}</p>
-          <p>Note: {expense.note}</p>
-          <hr />
-        </div>
+        <ExpenseCard
+          key={expense.id}
+          expense={expense}
+          onDelete={deleteExpense}
+        />
       ))}
     </div>
   );

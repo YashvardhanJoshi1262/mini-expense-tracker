@@ -1,16 +1,16 @@
 [
   {
-    "id": "a2928650-149e-4530-bed4-f2f715c02d16",
-    "amount": 999,
-    "category": "Food",
+    "id": "15b436e3-30f7-4ef8-8bc6-ebd28d5e7dde",
+    "amount": 18282,
+    "category": "water",
     "date": "2026-06-11",
-    "note": "Dinner"
+    "note": "clean water"
   },
   {
-    "id": "30c97b00-aa32-4214-9c6b-94938f778ad0",
-    "amount": 1200,
-    "category": "Bills",
-    "date": "2026-06-10",
-    "note": "Internet"
+    "id": "1a6a127e-2711-43bc-8ef4-b7e201820db6",
+    "amount": 22,
+    "category": "ee",
+    "date": "2026-06-01",
+    "note": "ee"
   }
 ]

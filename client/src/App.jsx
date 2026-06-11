@@ -1,15 +1,42 @@
+import { useEffect, useState } from "react";
+import axios from "axios";
+
 import "./App.css";
 import SummaryCard from "./components/SummaryCard";
+import ExpenseForm from "./components/ExpenseForm";
 import ExpenseList from "./components/ExpenseList";
 
 function App() {
+  const [expenses, setExpenses] = useState([]);
+
+  useEffect(() => {
+    fetchExpenses();
+  }, []);
+
+  const fetchExpenses = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:5000/api/expenses"
+      );
+
+      setExpenses(response.data);
+    } catch (error) {
+      console.error("Error fetching expenses:", error);
+    }
+  };
+
   return (
     <div className="app">
       <h1>Mini Expense Tracker</h1>
 
-      <SummaryCard />
+      <SummaryCard expenses={expenses} />
 
-      <ExpenseList />
+      <ExpenseForm fetchExpenses={fetchExpenses} />
+
+      <ExpenseList
+        expenses={expenses}
+        fetchExpenses={fetchExpenses}
+      />
     </div>
   );
 }
