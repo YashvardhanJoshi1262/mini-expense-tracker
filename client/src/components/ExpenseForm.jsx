@@ -13,6 +13,8 @@ function ExpenseForm({
     note: "",
   });
 
+  const [error, setError] = useState("");
+
   useEffect(() => {
   if (editingExpense) {
     setFormData({
@@ -35,6 +37,28 @@ function ExpenseForm({
 
   const handleSubmit = async (event) => {
   event.preventDefault();
+
+  setError("");
+
+if (!formData.amount || Number(formData.amount) <= 0) {
+  setError("Amount must be greater than 0");
+  return;
+}
+
+if (!formData.category.trim()) {
+  setError("Category is required");
+  return;
+}
+
+if (!formData.date) {
+  setError("Date is required");
+  return;
+}
+
+if (!formData.note.trim()) {
+  setError("Note is required");
+  return;
+}
 
   try {
     if (editingExpense) {
@@ -78,6 +102,10 @@ console.log("Expense added");
   return (
     <div>
       <h2>Add Expense</h2>
+
+      {error && (
+  <p>{error}</p>
+)}
 
       <form onSubmit={handleSubmit}>
         <input

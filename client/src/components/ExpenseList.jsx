@@ -7,6 +7,13 @@ function ExpenseList({
   onEdit,
 }) {
   const deleteExpense = async (id) => {
+    const confirmed = window.confirm(
+  "Are you sure you want to delete this expense?"
+);
+
+if (!confirmed) {
+  return;
+}
     try {
       await axios.delete(
         `http://localhost:5000/api/expenses/${id}`

@@ -9,6 +9,8 @@ import ExpenseList from "./components/ExpenseList";
 function App() {
   const [expenses, setExpenses] = useState([]);
 
+  const [searchTerm, setSearchTerm] = useState("");
+
   const [editingExpense, setEditingExpense] =
   useState(null);
 
@@ -28,9 +30,32 @@ function App() {
     }
   };
 
+  const filteredExpenses = expenses.filter(
+  (expense) =>
+    expense.category
+      .toLowerCase()
+      .includes(
+        searchTerm.toLowerCase()
+      ) ||
+    expense.note
+      .toLowerCase()
+      .includes(
+        searchTerm.toLowerCase()
+      )
+);
+
   return (
     <div className="app">
       <h1>Mini Expense Tracker</h1>
+
+      <input
+  type="text"
+  placeholder="Search expenses..."
+  value={searchTerm}
+  onChange={(event) =>
+    setSearchTerm(event.target.value)
+  }
+/>
 
       <SummaryCard expenses={expenses} />
 
@@ -41,7 +66,7 @@ function App() {
       />
 
       <ExpenseList
-        expenses={expenses}
+  expenses={filteredExpenses}
         fetchExpenses={fetchExpenses}
         onEdit={setEditingExpense}
       />
