@@ -5,14 +5,22 @@ function SummaryCard({ expenses }) {
   );
 
   return (
-    <div>
-      <h2>Expense Summary</h2>
-
-      <p>Total Expenses: ₹{totalExpenses}</p>
-
-      <p>Total Records: {expenses.length}</p>
+  <div className="summary-container">
+    <div className="summary-card">
+      <h3>Total Expenses</h3>
+      <div className="summary-value">
+        ₹{totalExpenses}
+      </div>
     </div>
-  );
+
+    <div className="summary-card">
+      <h3>Total Records</h3>
+      <div className="summary-value">
+        {expenses.length}
+      </div>
+    </div>
+  </div>
+);
 }
 
 export default SummaryCard;

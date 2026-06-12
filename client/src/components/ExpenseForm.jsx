@@ -100,11 +100,22 @@ console.log("Expense added");
 };
 
   return (
-    <div>
-      <h2>Add Expense</h2>
+  <div className="form-card">
+    <h2>
+      {editingExpense
+        ? "Update Expense"
+        : "Add Expense"}
+    </h2>
 
       {error && (
-  <p>{error}</p>
+  <p
+    style={{
+      color: "#ff6b6b",
+      marginBottom: "12px",
+    }}
+  >
+    {error}
+  </p>
 )}
 
       <form onSubmit={handleSubmit}>

@@ -4,26 +4,39 @@ function ExpenseCard({
   onEdit,
 }) {
   return (
-    <div>
-      <p>Amount: ₹{expense.amount}</p>
-      <p>Category: {expense.category}</p>
-      <p>Note: {expense.note}</p>
+    <div className="expense-card">
+      <h3>₹{expense.amount}</h3>
 
-      <button
-        onClick={() => onEdit(expense)}
-      >
-        Edit
-      </button>
+      <p>
+        <strong>Category:</strong>{" "}
+        {expense.category}
+      </p>
 
-      {" "}
+      <p>
+        <strong>Date:</strong>{" "}
+        {expense.date}
+      </p>
 
-      <button
-        onClick={() => onDelete(expense.id)}
-      >
-        Delete
-      </button>
+      <p>
+        <strong>Note:</strong>{" "}
+        {expense.note}
+      </p>
 
-      <hr />
+      <div className="button-group">
+        <button
+          onClick={() => onEdit(expense)}
+        >
+          Edit
+        </button>
+
+        <button
+          onClick={() =>
+            onDelete(expense.id)
+          }
+        >
+          Delete
+        </button>
+      </div>
     </div>
   );
 }

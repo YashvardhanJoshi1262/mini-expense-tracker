@@ -9,6 +9,9 @@ import ExpenseList from "./components/ExpenseList";
 function App() {
   const [expenses, setExpenses] = useState([]);
 
+  const [selectedCategory, setSelectedCategory] =
+  useState("All");
+
   const [searchTerm, setSearchTerm] = useState("");
 
   const [editingExpense, setEditingExpense] =
@@ -31,24 +34,39 @@ function App() {
   };
 
   const filteredExpenses = expenses.filter(
-  (expense) =>
-    expense.category
-      .toLowerCase()
-      .includes(
-        searchTerm.toLowerCase()
-      ) ||
-    expense.note
-      .toLowerCase()
-      .includes(
-        searchTerm.toLowerCase()
-      )
+  (expense) => {
+    const matchesSearch =
+      expense.category
+        .toLowerCase()
+        .includes(
+          searchTerm.toLowerCase()
+        ) ||
+      expense.note
+        .toLowerCase()
+        .includes(
+          searchTerm.toLowerCase()
+        );
+
+    const matchesCategory =
+      selectedCategory === "All" ||
+      expense.category ===
+        selectedCategory;
+
+    return (
+      matchesSearch &&
+      matchesCategory
+    );
+  }
 );
 
   return (
     <div className="app">
-      <h1>Mini Expense Tracker</h1>
+      <div className="dashboard-header">
+  <h1>Mini Expense Tracker</h1>
+</div>
 
       <input
+      className="search-bar"
   type="text"
   placeholder="Search expenses..."
   value={searchTerm}
@@ -64,6 +82,40 @@ function App() {
         editingExpense={editingExpense}
         setEditingExpense={setEditingExpense}
       />
+
+      <div className="filter-container">
+  <button
+    onClick={() =>
+      setSelectedCategory("All")
+    }
+  >
+    All
+  </button>
+
+  <button
+    onClick={() =>
+      setSelectedCategory("Food")
+    }
+  >
+    Food
+  </button>
+
+  <button
+    onClick={() =>
+      setSelectedCategory("Bills")
+    }
+  >
+    Bills
+  </button>
+
+  <button
+    onClick={() =>
+      setSelectedCategory("Transport")
+    }
+  >
+    Transport
+  </button>
+</div>
 
       <ExpenseList
   expenses={filteredExpenses}
