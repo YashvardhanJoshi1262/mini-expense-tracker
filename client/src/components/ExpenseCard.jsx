@@ -1,3 +1,4 @@
+import { formatCurrency } from "../utils/formatCurrency";
 function ExpenseCard({
   expense,
   onDelete,
@@ -5,7 +6,11 @@ function ExpenseCard({
 }) {
   return (
     <div className="expense-card">
-      <h3>₹{expense.amount}</h3>
+      <h3>
+  {formatCurrency(
+    expense.amount
+  )}
+</h3>
 
       <p>
         <strong>Category:</strong>{" "}

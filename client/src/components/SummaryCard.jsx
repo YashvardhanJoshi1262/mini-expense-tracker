@@ -1,3 +1,4 @@
+import { formatCurrency } from "../utils/formatCurrency";
 function SummaryCard({ expenses }) {
   const totalExpenses = expenses.reduce(
     (sum, expense) =>
@@ -65,7 +66,9 @@ function SummaryCard({ expenses }) {
           <h3>Total Expenses</h3>
 
           <div className="summary-value">
-            ₹{totalExpenses}
+            {formatCurrency(
+  totalExpenses
+)}
           </div>
         </div>
 
@@ -81,7 +84,9 @@ function SummaryCard({ expenses }) {
           <h3>This Month</h3>
 
           <div className="summary-value">
-            ₹{totalThisMonth}
+            {formatCurrency(
+  totalThisMonth
+)}
           </div>
         </div>
 
@@ -89,7 +94,9 @@ function SummaryCard({ expenses }) {
           <h3>Highest Expense</h3>
 
           <div className="summary-value">
-            ₹{highestExpense}
+            {formatCurrency(
+  highestExpense
+)}
           </div>
         </div>
       </div>
@@ -102,7 +109,8 @@ function SummaryCard({ expenses }) {
         ).map(
           ([category, amount]) => (
             <p key={category}>
-              {category}: ₹{amount}
+              {category}:{" "}
+{formatCurrency(amount)}
             </p>
           )
         )}

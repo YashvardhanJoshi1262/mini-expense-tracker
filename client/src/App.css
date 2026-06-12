@@ -140,3 +140,40 @@
   border: none;
   cursor: pointer;
 }
+
+@media (max-width: 768px) {
+  .app {
+    padding: 20px 12px;
+  }
+
+  .summary-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .summary-card {
+    width: 100%;
+    min-width: unset;
+    box-sizing: border-box;
+  }
+
+  .button-group {
+    flex-direction: column;
+  }
+
+  .button-group button {
+    width: 100%;
+  }
+
+  .filter-container {
+    justify-content: center;
+  }
+
+  .filter-container button {
+    width: 100%;
+  }
+
+  h1 {
+    font-size: 32px;
+  }
+}

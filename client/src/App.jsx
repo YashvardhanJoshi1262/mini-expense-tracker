@@ -5,6 +5,7 @@ import "./App.css";
 import SummaryCard from "./components/SummaryCard";
 import ExpenseForm from "./components/ExpenseForm";
 import ExpenseList from "./components/ExpenseList";
+import ExpenseChart from "./components/ExpenseChart";
 
 function App() {
   const [expenses, setExpenses] = useState([]);
@@ -119,6 +120,10 @@ const categories = [
 />
 
       <SummaryCard expenses={expenses} />
+
+      <ExpenseChart
+  expenses={filteredExpenses}
+/>
 
       <ExpenseForm
         fetchExpenses={fetchExpenses}

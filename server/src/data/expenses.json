@@ -33,5 +33,19 @@
     "category": "food",
     "date": "2026-06-01",
     "note": "jam"
+  },
+  {
+    "id": "045cf782-c4bf-495f-8158-624e53ffda3f",
+    "amount": 1566,
+    "category": "jogging",
+    "date": "2026-06-11",
+    "note": "hhh"
+  },
+  {
+    "id": "6ba7b0dd-7727-4dbb-9373-93d45d87af37",
+    "amount": 222,
+    "category": "sd",
+    "date": "2026-06-12",
+    "note": "ss"
   }
 ]

@@ -55,10 +55,29 @@ if (!formData.date) {
   return;
 }
 
+const selectedDate = new Date(
+  formData.date
+);
+
+selectedDate.setHours(0, 0, 0, 0);
+
+const today = new Date();
+
+today.setHours(0, 0, 0, 0);
+
+if (selectedDate > today) {
+  setError(
+    "Future dates are not allowed"
+  );
+  return;
+}
+
 if (!formData.note.trim()) {
   setError("Note is required");
   return;
 }
+
+
 
   try {
     if (editingExpense) {
