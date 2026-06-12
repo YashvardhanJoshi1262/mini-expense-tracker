@@ -80,7 +80,7 @@ function ExpenseForm({ fetchExpenses, editingExpense, setEditingExpense }) {
     try {
       if (editingExpense) {
         await axios.put(
-          `http://localhost:5000/api/expenses/${editingExpense.id}`,
+          `https://mini-expense-tracker-api-l3hn.onrender.com/api/expenses/${editingExpense.id}`,
           {
             ...formData,
             amount: Number(formData.amount),
@@ -89,10 +89,13 @@ function ExpenseForm({ fetchExpenses, editingExpense, setEditingExpense }) {
 
         setEditingExpense(null);
       } else {
-        await axios.post("http://localhost:5000/api/expenses", {
-          ...formData,
-          amount: Number(formData.amount),
-        });
+        await axios.post(
+          "https://mini-expense-tracker-api-l3hn.onrender.com/api/expenses",
+          {
+            ...formData,
+            amount: Number(formData.amount),
+          },
+        );
       }
 
       fetchExpenses();

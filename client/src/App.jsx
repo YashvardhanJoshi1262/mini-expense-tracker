@@ -31,7 +31,9 @@ function App() {
 
   const fetchExpenses = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/expenses");
+      const response = await axios.get(
+        "https://mini-expense-tracker-api-l3hn.onrender.com/api/expenses",
+      );
 
       setExpenses(response.data);
     } catch (error) {

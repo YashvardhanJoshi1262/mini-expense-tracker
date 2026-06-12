@@ -13,7 +13,9 @@ function ExpenseList({ expenses, fetchExpenses, onEdit }) {
       return;
     }
     try {
-      await axios.delete(`http://localhost:5000/api/expenses/${id}`);
+      await axios.delete(
+        `https://mini-expense-tracker-api-l3hn.onrender.com/api/expenses/${id}`,
+      );
 
       fetchExpenses();
     } catch (error) {
