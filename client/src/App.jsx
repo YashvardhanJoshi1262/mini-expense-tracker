@@ -12,6 +12,9 @@ function App() {
   const [selectedCategory, setSelectedCategory] =
   useState("All");
 
+  const [dateFilter, setDateFilter] =
+  useState("All Time");
+
   const [searchTerm, setSearchTerm] = useState("");
 
   const [editingExpense, setEditingExpense] =
@@ -33,7 +36,7 @@ function App() {
     }
   };
 
-  const filteredExpenses = expenses.filter(
+const filteredExpenses = expenses.filter(
   (expense) => {
     const matchesSearch =
       expense.category
@@ -52,12 +55,52 @@ function App() {
       expense.category ===
         selectedCategory;
 
+    let matchesDate = true;
+
+    const expenseDate =
+      new Date(expense.date);
+
+    const today = new Date();
+
+    if (
+      dateFilter === "This Month"
+    ) {
+      matchesDate =
+        expenseDate.getMonth() ===
+          today.getMonth() &&
+        expenseDate.getFullYear() ===
+          today.getFullYear();
+    }
+
+    if (
+      dateFilter === "Last Month"
+    ) {
+      const lastMonth =
+        today.getMonth() - 1;
+
+      matchesDate =
+        expenseDate.getMonth() ===
+          lastMonth &&
+        expenseDate.getFullYear() ===
+          today.getFullYear();
+    }
+
     return (
       matchesSearch &&
-      matchesCategory
+      matchesCategory &&
+      matchesDate
     );
   }
 );
+
+const categories = [
+  "All",
+  ...new Set(
+    expenses.map(
+      (expense) => expense.category
+    )
+  ),
+];
 
   return (
     <div className="app">
@@ -84,36 +127,41 @@ function App() {
       />
 
       <div className="filter-container">
+  {categories.map((category) => (
+    <button
+      key={category}
+      onClick={() =>
+        setSelectedCategory(category)
+      }
+    >
+      {category}
+    </button>
+  ))}
+</div>
+
+<div className="filter-container">
   <button
     onClick={() =>
-      setSelectedCategory("All")
+      setDateFilter("All Time")
     }
   >
-    All
+    All Time
   </button>
 
   <button
     onClick={() =>
-      setSelectedCategory("Food")
+      setDateFilter("This Month")
     }
   >
-    Food
+    This Month
   </button>
 
   <button
     onClick={() =>
-      setSelectedCategory("Bills")
+      setDateFilter("Last Month")
     }
   >
-    Bills
-  </button>
-
-  <button
-    onClick={() =>
-      setSelectedCategory("Transport")
-    }
-  >
-    Transport
+    Last Month
   </button>
 </div>
 
