@@ -1,13 +1,28 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
-function ExpenseForm({ fetchExpenses }) {
+function ExpenseForm({
+  fetchExpenses,
+  editingExpense,
+  setEditingExpense,
+}) {
   const [formData, setFormData] = useState({
     amount: "",
     category: "",
     date: "",
     note: "",
   });
+
+  useEffect(() => {
+  if (editingExpense) {
+    setFormData({
+      amount: editingExpense.amount,
+      category: editingExpense.category,
+      date: editingExpense.date,
+      note: editingExpense.note,
+    });
+  }
+}, [editingExpense]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -22,13 +37,25 @@ function ExpenseForm({ fetchExpenses }) {
   event.preventDefault();
 
   try {
-    await axios.post(
-  "http://localhost:5000/api/expenses",
-  {
-    ...formData,
-    amount: Number(formData.amount),
-  }
-);
+    if (editingExpense) {
+  await axios.put(
+    `http://localhost:5000/api/expenses/${editingExpense.id}`,
+    {
+      ...formData,
+      amount: Number(formData.amount),
+    }
+  );
+
+  setEditingExpense(null);
+} else {
+  await axios.post(
+    "http://localhost:5000/api/expenses",
+    {
+      ...formData,
+      amount: Number(formData.amount),
+    }
+  );
+}
 
 fetchExpenses();
 
@@ -97,8 +124,10 @@ console.log("Expense added");
         <br />
 
         <button type="submit">
-          Add Expense
-        </button>
+  {editingExpense
+    ? "Update Expense"
+    : "Add Expense"}
+</button>
       </form>
     </div>
   );

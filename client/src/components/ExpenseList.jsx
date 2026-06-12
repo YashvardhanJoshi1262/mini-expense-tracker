@@ -4,6 +4,7 @@ import ExpenseCard from "./ExpenseCard";
 function ExpenseList({
   expenses,
   fetchExpenses,
+  onEdit,
 }) {
   const deleteExpense = async (id) => {
     try {
@@ -29,6 +30,7 @@ function ExpenseList({
           key={expense.id}
           expense={expense}
           onDelete={deleteExpense}
+          onEdit={onEdit}
         />
       ))}
     </div>

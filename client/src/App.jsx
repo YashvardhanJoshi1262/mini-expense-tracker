@@ -9,6 +9,9 @@ import ExpenseList from "./components/ExpenseList";
 function App() {
   const [expenses, setExpenses] = useState([]);
 
+  const [editingExpense, setEditingExpense] =
+  useState(null);
+
   useEffect(() => {
     fetchExpenses();
   }, []);
@@ -31,11 +34,16 @@ function App() {
 
       <SummaryCard expenses={expenses} />
 
-      <ExpenseForm fetchExpenses={fetchExpenses} />
+      <ExpenseForm
+        fetchExpenses={fetchExpenses}
+        editingExpense={editingExpense}
+        setEditingExpense={setEditingExpense}
+      />
 
       <ExpenseList
         expenses={expenses}
         fetchExpenses={fetchExpenses}
+        onEdit={setEditingExpense}
       />
     </div>
   );
