@@ -1,63 +1,41 @@
 import { formatCurrency } from "../utils/formatCurrency";
-function SummaryCard({ expenses }) {
+function SummaryCard({ expenses, budgets }) {
   const totalExpenses = expenses.reduce(
-    (sum, expense) =>
-      sum + Number(expense.amount),
-    0
+    (sum, expense) => sum + Number(expense.amount),
+    0,
   );
 
-  const currentMonth =
-    new Date().getMonth();
+  const currentMonth = new Date().getMonth();
 
-  const currentYear =
-    new Date().getFullYear();
+  const currentYear = new Date().getFullYear();
 
   const totalThisMonth = expenses
     .filter((expense) => {
-      const expenseDate =
-        new Date(expense.date);
+      const expenseDate = new Date(expense.date);
 
       return (
-        expenseDate.getMonth() ===
-          currentMonth &&
-        expenseDate.getFullYear() ===
-          currentYear
+        expenseDate.getMonth() === currentMonth &&
+        expenseDate.getFullYear() === currentYear
       );
     })
-    .reduce(
-      (sum, expense) =>
-        sum + Number(expense.amount),
-      0
-    );
+    .reduce((sum, expense) => sum + Number(expense.amount), 0);
 
   const highestExpense =
     expenses.length > 0
-      ? Math.max(
-          ...expenses.map(
-            (expense) =>
-              Number(expense.amount)
-          )
-        )
+      ? Math.max(...expenses.map((expense) => Number(expense.amount)))
       : 0;
 
-  const categoryTotals =
-    expenses.reduce(
-      (result, expense) => {
-        const category =
-          expense.category;
+  const categoryTotals = expenses.reduce((result, expense) => {
+    const category = expense.category;
 
-        if (!result[category]) {
-          result[category] = 0;
-        }
+    if (!result[category]) {
+      result[category] = 0;
+    }
 
-        result[category] += Number(
-          expense.amount
-        );
+    result[category] += Number(expense.amount);
 
-        return result;
-      },
-      {}
-    );
+    return result;
+  }, {});
 
   return (
     <div>
@@ -65,55 +43,52 @@ function SummaryCard({ expenses }) {
         <div className="summary-card">
           <h3>Total Expenses</h3>
 
-          <div className="summary-value">
-            {formatCurrency(
-  totalExpenses
-)}
-          </div>
+          <div className="summary-value">{formatCurrency(totalExpenses)}</div>
         </div>
 
         <div className="summary-card">
           <h3>Total Records</h3>
 
-          <div className="summary-value">
-            {expenses.length}
-          </div>
+          <div className="summary-value">{expenses.length}</div>
         </div>
 
         <div className="summary-card">
           <h3>This Month</h3>
 
-          <div className="summary-value">
-            {formatCurrency(
-  totalThisMonth
-)}
-          </div>
+          <div className="summary-value">{formatCurrency(totalThisMonth)}</div>
         </div>
 
         <div className="summary-card">
           <h3>Highest Expense</h3>
 
-          <div className="summary-value">
-            {formatCurrency(
-  highestExpense
-)}
-          </div>
+          <div className="summary-value">{formatCurrency(highestExpense)}</div>
         </div>
       </div>
 
       <div className="summary-card">
         <h3>Category Breakdown</h3>
 
-        {Object.entries(
-          categoryTotals
-        ).map(
-          ([category, amount]) => (
-            <p key={category}>
-              {category}:{" "}
-{formatCurrency(amount)}
-            </p>
-          )
-        )}
+        {Object.entries(categoryTotals).map(([category, amount]) => {
+          const budget = budgets[category];
+
+          const exceeded = budget && amount > budget;
+
+          return (
+            <div
+              key={category}
+              style={{
+                marginBottom: "12px",
+              }}
+            >
+              <p>
+                {category}: {formatCurrency(amount)}
+                {budget && ` / ${formatCurrency(budget)}`}
+              </p>
+
+              {exceeded && <p>⚠ Budget Exceeded</p>}
+            </div>
+          );
+        })}
       </div>
     </div>
   );

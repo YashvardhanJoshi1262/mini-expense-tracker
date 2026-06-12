@@ -33,7 +33,7 @@
   padding: 20px;
   border-radius: 12px;
   min-width: 220px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .summary-value {
@@ -79,7 +79,7 @@
   border-radius: 12px;
   margin-bottom: 15px;
   text-align: left;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .expense-card h3 {

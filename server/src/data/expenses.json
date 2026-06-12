@@ -1,19 +1,5 @@
 [
   {
-    "id": "15b436e3-30f7-4ef8-8bc6-ebd28d5e7dde",
-    "amount": 8,
-    "category": "water",
-    "date": "2026-06-11",
-    "note": "clean water"
-  },
-  {
-    "id": "cdc23365-a09e-4d9c-a6e8-196a66738178",
-    "amount": 100,
-    "category": "stattionary",
-    "date": "2026-07-02",
-    "note": "books and pen"
-  },
-  {
     "id": "72c2b588-cc7e-489f-b1c2-0b15f0084744",
     "amount": 1500,
     "category": "shopping",
@@ -47,5 +33,12 @@
     "category": "sd",
     "date": "2026-06-12",
     "note": "ss"
+  },
+  {
+    "id": "10bb58a3-7b88-4a8a-ac58-04c09f909051",
+    "amount": 5000,
+    "category": "food",
+    "date": "2026-06-12",
+    "note": "dggd"
   }
 ]

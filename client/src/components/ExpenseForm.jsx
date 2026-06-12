@@ -1,11 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-function ExpenseForm({
-  fetchExpenses,
-  editingExpense,
-  setEditingExpense,
-}) {
+function ExpenseForm({ fetchExpenses, editingExpense, setEditingExpense }) {
   const [formData, setFormData] = useState({
     amount: "",
     category: "",
@@ -16,15 +12,15 @@ function ExpenseForm({
   const [error, setError] = useState("");
 
   useEffect(() => {
-  if (editingExpense) {
-    setFormData({
-      amount: editingExpense.amount,
-      category: editingExpense.category,
-      date: editingExpense.date,
-      note: editingExpense.note,
-    });
-  }
-}, [editingExpense]);
+    if (editingExpense) {
+      setFormData({
+        amount: editingExpense.amount,
+        category: editingExpense.category,
+        date: editingExpense.date,
+        note: editingExpense.note,
+      });
+    }
+  }, [editingExpense]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -36,106 +32,90 @@ function ExpenseForm({
   };
 
   const handleSubmit = async (event) => {
-  event.preventDefault();
+    event.preventDefault();
 
-  setError("");
+    setError("");
 
-if (!formData.amount || Number(formData.amount) <= 0) {
-  setError("Amount must be greater than 0");
-  return;
-}
-
-if (!formData.category.trim()) {
-  setError("Category is required");
-  return;
-}
-
-if (!formData.date) {
-  setError("Date is required");
-  return;
-}
-
-const selectedDate = new Date(
-  formData.date
-);
-
-selectedDate.setHours(0, 0, 0, 0);
-
-const today = new Date();
-
-today.setHours(0, 0, 0, 0);
-
-if (selectedDate > today) {
-  setError(
-    "Future dates are not allowed"
-  );
-  return;
-}
-
-if (!formData.note.trim()) {
-  setError("Note is required");
-  return;
-}
-
-
-
-  try {
-    if (editingExpense) {
-  await axios.put(
-    `http://localhost:5000/api/expenses/${editingExpense.id}`,
-    {
-      ...formData,
-      amount: Number(formData.amount),
+    if (!formData.amount || Number(formData.amount) <= 0) {
+      setError("Amount must be greater than 0");
+      return;
     }
-  );
 
-  setEditingExpense(null);
-} else {
-  await axios.post(
-    "http://localhost:5000/api/expenses",
-    {
-      ...formData,
-      amount: Number(formData.amount),
+    if (!formData.category.trim()) {
+      setError("Category is required");
+      return;
     }
-  );
-}
 
-fetchExpenses();
+    if (!formData.date) {
+      setError("Date is required");
+      return;
+    }
 
-setFormData({
-  amount: "",
-  category: "",
-  date: "",
-  note: "",
-});
+    const selectedDate = new Date(formData.date);
 
-console.log("Expense added");
-  } catch (error) {
-    console.error(
-      "Error adding expense:",
-      error
-    );
-  }
-};
+    selectedDate.setHours(0, 0, 0, 0);
+
+    const today = new Date();
+
+    today.setHours(0, 0, 0, 0);
+
+    if (selectedDate > today) {
+      setError("Future dates are not allowed");
+      return;
+    }
+
+    if (!formData.note.trim()) {
+      setError("Note is required");
+      return;
+    }
+
+    try {
+      if (editingExpense) {
+        await axios.put(
+          `http://localhost:5000/api/expenses/${editingExpense.id}`,
+          {
+            ...formData,
+            amount: Number(formData.amount),
+          },
+        );
+
+        setEditingExpense(null);
+      } else {
+        await axios.post("http://localhost:5000/api/expenses", {
+          ...formData,
+          amount: Number(formData.amount),
+        });
+      }
+
+      fetchExpenses();
+
+      setFormData({
+        amount: "",
+        category: "",
+        date: "",
+        note: "",
+      });
+
+      console.log("Expense added");
+    } catch (error) {
+      console.error("Error adding expense:", error);
+    }
+  };
 
   return (
-  <div className="form-card">
-    <h2>
-      {editingExpense
-        ? "Update Expense"
-        : "Add Expense"}
-    </h2>
+    <div className="form-card">
+      <h2>{editingExpense ? "Update Expense" : "Add Expense"}</h2>
 
       {error && (
-  <p
-    style={{
-      color: "#ff6b6b",
-      marginBottom: "12px",
-    }}
-  >
-    {error}
-  </p>
-)}
+        <p
+          style={{
+            color: "#ff6b6b",
+            marginBottom: "12px",
+          }}
+        >
+          {error}
+        </p>
+      )}
 
       <form onSubmit={handleSubmit}>
         <input
@@ -182,10 +162,8 @@ console.log("Expense added");
         <br />
 
         <button type="submit">
-  {editingExpense
-    ? "Update Expense"
-    : "Add Expense"}
-</button>
+          {editingExpense ? "Update Expense" : "Add Expense"}
+        </button>
       </form>
     </div>
   );

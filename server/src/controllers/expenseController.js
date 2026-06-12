@@ -9,8 +9,7 @@ const getExpenses = (req, res) => {
 const createExpense = (req, res) => {
   const expenseData = req.body;
 
-  const newExpense =
-    expenseService.createExpense(expenseData);
+  const newExpense = expenseService.createExpense(expenseData);
 
   res.status(201).json(newExpense);
 };
@@ -18,8 +17,7 @@ const createExpense = (req, res) => {
 const deleteExpense = (req, res) => {
   const { id } = req.params;
 
-  const result =
-    expenseService.deleteExpense(id);
+  const result = expenseService.deleteExpense(id);
 
   res.status(200).json(result);
 };
@@ -29,15 +27,13 @@ const updateExpense = (req, res) => {
 
   const updatedData = req.body;
 
-  const updatedExpense =
-    expenseService.updateExpense(id, updatedData);
+  const updatedExpense = expenseService.updateExpense(id, updatedData);
 
   res.status(200).json(updatedExpense);
 };
 
 const getExpenseSummary = (req, res) => {
-  const summary =
-    expenseService.getExpenseSummary();
+  const summary = expenseService.getExpenseSummary();
 
   res.status(200).json(summary);
 };

@@ -9,38 +9,30 @@ import {
 } from "recharts";
 
 function ExpenseChart({ expenses }) {
-  const categoryTotals = expenses.reduce(
-    (result, expense) => {
-      const category = expense.category;
+  const categoryTotals = expenses.reduce((result, expense) => {
+    const category = expense.category;
 
-      if (!result[category]) {
-        result[category] = 0;
-      }
+    if (!result[category]) {
+      result[category] = 0;
+    }
 
-      result[category] += Number(
-        expense.amount
-      );
+    result[category] += Number(expense.amount);
 
-      return result;
-    },
-    {}
+    return result;
+  }, {});
+
+  const chartData = Object.entries(categoryTotals).map(
+    ([category, amount]) => ({
+      category,
+      amount,
+    }),
   );
-
-  const chartData = Object.entries(
-    categoryTotals
-  ).map(([category, amount]) => ({
-    category,
-    amount,
-  }));
 
   return (
     <div className="summary-card">
       <h3>Expenses by Category</h3>
 
-      <ResponsiveContainer
-  width="100%"
-  height={250}
->
+      <ResponsiveContainer width="100%" height={250}>
         <BarChart data={chartData}>
           <CartesianGrid strokeDasharray="3 3" />
 
@@ -50,9 +42,7 @@ function ExpenseChart({ expenses }) {
 
           <Tooltip />
 
-          <Bar
-            dataKey="amount"
-          />
+          <Bar dataKey="amount" />
         </BarChart>
       </ResponsiveContainer>
     </div>
