@@ -17,6 +17,9 @@ https://mini-expense-tracker-api-l3hn.onrender.com
 Health Check Endpoint:
 https://mini-expense-tracker-api-l3hn.onrender.com/api/health
 
+Repository:
+https://github.com/YashvardhanJoshi1262/mini-expense-tracker
+
 ---
 
 ## Tech Stack
@@ -278,6 +281,18 @@ mini-expense-tracker/
 - CSV Export
 - Responsive UI
 - JSON Data Persistence
+- Cloud Deployment
+
+---
+
+### Assignment Requirements Covered
+
+- Full CRUD Operations
+- Search Functionality
+- Filtering and Sorting
+- Dashboard Analytics
+- Data Visualization
+- JSON Persistence
 - Cloud Deployment
 
 ---
