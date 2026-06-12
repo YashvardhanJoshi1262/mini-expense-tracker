@@ -21,9 +21,13 @@ function App() {
 
   const [budgets, setBudgets] = useState({});
 
+  // Load expenses from backend when the application starts
+
   useEffect(() => {
     fetchExpenses();
   }, []);
+
+  // Fetch all expenses from the backend API
 
   const fetchExpenses = async () => {
     try {
@@ -34,6 +38,8 @@ function App() {
       console.error("Error fetching expenses:", error);
     }
   };
+
+  // Apply search, category and date filters to expenses
 
   const filteredExpenses = expenses.filter((expense) => {
     const matchesSearch =
@@ -66,6 +72,8 @@ function App() {
     return matchesSearch && matchesCategory && matchesDate;
   });
 
+  // Generate unique categories dynamically from expenses
+
   const categories = [
     "All",
     ...new Set(expenses.map((expense) => expense.category)),
@@ -89,6 +97,7 @@ function App() {
 
       <ExpenseChart expenses={filteredExpenses} />
 
+      {/* Export currently visible expenses as CSV */}
       <button
         onClick={() => {
           const headers = "Amount,Category,Date,Note\n";

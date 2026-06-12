@@ -86,9 +86,9 @@ const getExpenseSummary = () => {
 };
 
 module.exports = {
-  getAllExpenses,
-  createExpense,
-  deleteExpense,
-  updateExpense,
-  getExpenseSummary,
+  getAllExpenses, // return all stored expenses
+  createExpense, // create and save a new expense
+  deleteExpense, // delete an expense by id
+  updateExpense, // update an existing expense by id
+  getExpenseSummary, // get summary of expenses
 };

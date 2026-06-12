@@ -2,6 +2,8 @@ import axios from "axios";
 import ExpenseCard from "./ExpenseCard";
 
 function ExpenseList({ expenses, fetchExpenses, onEdit }) {
+  // Delete expense after user confirmation
+
   const deleteExpense = async (id) => {
     const confirmed = window.confirm(
       "Are you sure you want to delete this expense?",

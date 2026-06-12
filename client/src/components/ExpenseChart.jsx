@@ -9,6 +9,8 @@ import {
 } from "recharts";
 
 function ExpenseChart({ expenses }) {
+  // Group expenses by category for chart visualization
+
   const categoryTotals = expenses.reduce((result, expense) => {
     const category = expense.category;
 
@@ -20,6 +22,8 @@ function ExpenseChart({ expenses }) {
 
     return result;
   }, {});
+
+  // Convert grouped data into chart-friendly format
 
   const chartData = Object.entries(categoryTotals).map(
     ([category, amount]) => ({

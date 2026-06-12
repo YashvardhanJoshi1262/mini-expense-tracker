@@ -11,6 +11,8 @@ function ExpenseForm({ fetchExpenses, editingExpense, setEditingExpense }) {
 
   const [error, setError] = useState("");
 
+  // Populate form fields when editing an existing expense
+
   useEffect(() => {
     if (editingExpense) {
       setFormData({
@@ -22,6 +24,8 @@ function ExpenseForm({ fetchExpenses, editingExpense, setEditingExpense }) {
     }
   }, [editingExpense]);
 
+  // Update form state when user types in inputs
+
   const handleChange = (event) => {
     const { name, value } = event.target;
 
@@ -30,6 +34,8 @@ function ExpenseForm({ fetchExpenses, editingExpense, setEditingExpense }) {
       [name]: value,
     });
   };
+
+  // Validate form data and create/update an expense
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -50,6 +56,8 @@ function ExpenseForm({ fetchExpenses, editingExpense, setEditingExpense }) {
       setError("Date is required");
       return;
     }
+
+    // Prevent users from adding expenses with future dates
 
     const selectedDate = new Date(formData.date);
 

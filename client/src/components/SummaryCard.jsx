@@ -1,5 +1,7 @@
 import { formatCurrency } from "../utils/formatCurrency";
 function SummaryCard({ expenses, budgets }) {
+  // Calculate total spending across all expenses
+
   const totalExpenses = expenses.reduce(
     (sum, expense) => sum + Number(expense.amount),
     0,
@@ -8,6 +10,8 @@ function SummaryCard({ expenses, budgets }) {
   const currentMonth = new Date().getMonth();
 
   const currentYear = new Date().getFullYear();
+
+  // Calculate spending for the current month
 
   const totalThisMonth = expenses
     .filter((expense) => {
@@ -20,11 +24,14 @@ function SummaryCard({ expenses, budgets }) {
     })
     .reduce((sum, expense) => sum + Number(expense.amount), 0);
 
+  // Find the highest single expense amount
+
   const highestExpense =
     expenses.length > 0
       ? Math.max(...expenses.map((expense) => Number(expense.amount)))
       : 0;
 
+  // Calculate total spending for each category
   const categoryTotals = expenses.reduce((result, expense) => {
     const category = expense.category;
 

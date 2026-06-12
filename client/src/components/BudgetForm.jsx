@@ -5,6 +5,8 @@ function BudgetForm({ budgets, setBudgets }) {
 
   const [amount, setAmount] = useState("");
 
+  // Save budget amount for a specific category
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
